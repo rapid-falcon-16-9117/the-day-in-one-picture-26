@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The World in One Page — Thursday, 26 November 2026</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1024px; height: 1024px; }
+  body {
+    background: #f6f1e3;
+    color: #1b1813;
+    font-family: Georgia, "Times New Roman", "DejaVu Serif", serif;
+    padding: 12px 30px 10px 30px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .sans { font-family: "Helvetica Neue", Arial, "DejaVu Sans", sans-serif; }
+
+  /* ---------- masthead ---------- */
+  .eyebrow {
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-family: "Helvetica Neue", Arial, "DejaVu Sans", sans-serif;
+    font-size: 13px; letter-spacing: 2.5px; text-transform: uppercase;
+    color: #5a5344; padding-bottom: 5px;
+    border-bottom: 1px solid #1b1813;
+  }
+  h1.masthead {
+    text-align: center;
+    font-size: 46px; font-weight: 900; letter-spacing: 0.5px;
+    line-height: 1.0; padding: 5px 0 1px 0;
+    text-transform: uppercase;
+  }
+  .dateline {
+    text-align: center;
+    font-size: 26px; font-weight: 700;
+    padding: 2px 0 5px 0;
+    border-bottom: 4px double #1b1813;
+  }
+  .dateline .accent { color: #a31d21; }
+
+  /* ---------- lead story ---------- */
+  .lead {
+    display: flex; gap: 22px;
+    padding: 7px 0 7px 0;
+    border-bottom: 2px solid #1b1813;
+  }
+  .lead-text { flex: 1 1 auto; }
+  .kicker {
+    font-family: "Helvetica Neue", Arial, "DejaVu Sans", sans-serif;
+    font-size: 14px; font-weight: 700; letter-spacing: 2.5px;
+    color: #a31d21; text-transform: uppercase; margin-bottom: 3px;
+  }
+  .lead h2 {
+    font-size: 38px; font-weight: 900; line-height: 1.0;
+    text-transform: uppercase;
+  }
+  .lead .deck {
+    font-size: 17px; font-style: italic; line-height: 1.2;
+    margin-top: 4px; color: #2c2820;
+  }
+  .lead .body {
+    font-family: "Helvetica Neue", Arial, "DejaVu Sans", sans-serif;
+    font-size: 13.5px; line-height: 1.3; margin-top: 4px; color: #3d382e;
+  }
+  .lead .src {
+    font-family: "Helvetica Neue", Arial, "DejaVu Sans", sans-serif;
+    font-size: 10.5px; color: #6b6350; margin-top: 3px;
+  }
+  .lead-art { flex: 0 0 196px; display: flex; align-items: center; justify-content: center; }
+  .conf {
+    display: inline-block; font-family: "Helvetica Neue", Arial, "DejaVu Sans", sans-serif;
+    font-size: 10px; font-weight: 700; letter-spacing: 1px;
+    border: 1px solid #a31d21; color: #a31d21; padding: 1px 5px;
+    text-transform: uppercase; vertical-align: middle; margin-left: 6px;
+  }
+  .conf.off { border-color: #1d4e6b; color: #1d4e6b; }
+
+  /* ---------- numbered grid ---------- */
+  .grid {
+    flex: 0 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(4, 74px);
+  }
+  .cell {
+    display: flex; gap: 9px; align-items: flex-start;
+    padding: 5px 12px 4px 4px;
+    overflow: hidden;
+  }
+  .cell:nth-child(odd)  { border-right: 1px solid #b9b09a; padding-right: 14px; }
+  .cell:nth-child(even) { padding-left: 14px; }
+  .cell:nth-child(-n+6) { border-bottom: 1px solid #b9b09a; }
+  .num {
+    flex: 0 0 26px; height: 26px; border-radius: 50%;
+    background: #1b1813; color: #f6f1e3;
+    font-family: "Helvetica Neue", Arial, "DejaVu Sans", sans-serif;
+    font-size: 14px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    margin-top: 2px;
+  }
+  .cell h3 {
+    font-size: 17px; font-weight: 900; line-height: 1.08;
+    text-transform: uppercase; letter-spacing: 0.1px;
+  }
+  .cell p {
+    font-family: "Helvetica Neue", Arial, "DejaVu Sans", sans-serif;
+    font-size: 12.5px; line-height: 1.28; color: #3d382e; margin-top: 2px;
+  }
+  .cell .src {
+    font-family: "Helvetica Neue", Arial, "DejaVu Sans", sans-serif;
+    font-size: 10px; color: #6b6350; margin-top: 2px;
+  }
+  .tag {
+    font-family: "Helvetica Neue", Arial, "DejaVu Sans", sans-serif;
+    font-size: 10.5px; font-weight: 700; letter-spacing: 2px;
+    color: #a31d21; text-transform: uppercase;
+  }
+  .tag .conf { float: right; margin-left: 0; }
+
+  /* ---------- ALSO ON band ---------- */
+  .also {
+    border-top: 2px solid #1b1813;
+    margin-top: 6px; padding-top: 5px;
+  }
+  .also h4 {
+    font-family: "Helvetica Neue", Arial, "DejaVu Sans", sans-serif;
+    font-size: 13px; font-weight: 900; letter-spacing: 2.5px;
+    text-transform: uppercase; margin-bottom: 3px;
+  }
+  .also h4 span { color: #a31d21; }
+  .also-cols {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0 18px;
+  }
+  .also-cols ul { list-style: none; }
+  .also-cols li {
+    font-family: "Helvetica Neue", Arial, "DejaVu Sans", sans-serif;
+    font-size: 12px; line-height: 1.25; color: #2c2820;
+    padding: 2px 0 2px 12px; position: relative;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .also-cols li::before {
+    content: "▪"; position: absolute; left: 0; top: 2px; color: #a31d21;
+  }
+  .also-cols li b { color: #1b1813; }
+
+  /* ---------- map + timeline band ---------- */
+  .mapband {
+    display: flex; gap: 16px; align-items: stretch;
+    border-top: 2px solid #1b1813;
+    margin-top: 6px; padding-top: 5px;
+  }
+  .mapbox { flex: 0 0 330px; }
+  .mapbox h5, .tlbox h5 {
+    font-family: "Helvetica Neue", Arial, "DejaVu Sans", sans-serif;
+    font-size: 11.5px; font-weight: 900; letter-spacing: 2px;
+    text-transform: uppercase; margin-bottom: 2px;
+  }
+  .mapbox h5 span, .tlbox h5 span { color: #a31d21; }
+  .tlbox { flex: 1 1 auto; }
+  .timeline {
+    display: grid; grid-template-columns: repeat(7, 1fr); gap: 0 8px;
+    border-top: 2px solid #1b1813; padding-top: 4px;
+  }
+  .slot .t {
+    font-family: "Helvetica Neue", Arial, "DejaVu Sans", sans-serif;
+    font-size: 11px; font-weight: 700; color: #a31d21;
+  }
+  .slot p {
+    font-family: "Helvetica Neue", Arial, "DejaVu Sans", sans-serif;
+    font-size: 10.5px; line-height: 1.22; color: #3d382e; margin-top: 2px;
+  }
+
+  /* ---------- footer ---------- */
+  .datecheck {
+    border-top: 2px solid #1b1813;
+    margin-top: 6px; padding-top: 4px;
+    font-family: "Helvetica Neue", Arial, "DejaVu Sans", sans-serif;
+    font-size: 11px; line-height: 1.3; color: #3d382e;
+  }
+  .datecheck b {
+    font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+    color: #1d4e6b;
+  }
+  .ticker {
+    background: #1b1813; color: #f6f1e3;
+    font-family: "Helvetica Neue", Arial, "DejaVu Sans", sans-serif;
+    margin-top: 6px; padding: 6px 14px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .ticker .label {
+    flex: 0 0 auto; font-size: 12px; font-weight: 700; letter-spacing: 2px;
+    color: #e8b64c; text-transform: uppercase;
+    border-right: 1px solid #57503f; padding-right: 12px;
+  }
+  .ticker .items { font-size: 13.5px; line-height: 1.3; text-align: center; flex: 1 1 auto; }
+  .ticker .down { color: #e88a8a; }
+  .ticker .sep { color: #8a8271; padding: 0 2px; }
+</style>
+</head>
+<body>
+
+  <div class="eyebrow">
+    <span>World Edition</span>
+    <span>All the day's news · One page · 36 stories, 9 regions</span>
+    <span>No. 26</span>
+  </div>
+
+  <h1 class="masthead">The World in One Page</h1>
+
+  <div class="dateline">Thursday, <span class="accent">26 November 2026</span></div>
+
+  <!-- ================= LEAD ================= -->
+  <section class="lead">
+    <div class="lead-text">
+      <div class="kicker">Strait of Hormuz · Ras Tanura</div>
+      <h2>Mines in the Strait</h2>
+      <p class="deck">Two tankers hit naval mines; Houthis say they struck Saudi Arabia&rsquo;s Ras Tanura refinery.</p>
+      <p class="body">Iran&rsquo;s Revolutionary Guard claims a supertanker carrying 2 million+ barrels was mined near Khasab, Oman. Oil edges up as the waterway — the world&rsquo;s busiest oil chokepoint — turns into a minefield.</p>
+      <p class="src">REPORTED — mine strikes &nbsp;·&nbsp; CLAIM — supertanker &nbsp;·&nbsp; Sources: Reuters, Tasnim, T&uuml;rkiye Today</p>
+    </div>
+    <div class="lead-art">
+      <!-- tanker, naval mine and flame over waves -->
+      <svg width="190" height="116" viewBox="0 0 190 116" fill="none" stroke="#1b1813" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M8 82 L182 82 L168 100 L24 100 Z"/>
+        <rect x="70" y="66" width="48" height="16"/>
+        <line x1="140" y1="66" x2="140" y2="82"/>
+        <line x1="118" y1="66" x2="118" y2="82"/>
+        <!-- naval mine ahead of the bow -->
+        <circle cx="34" cy="58" r="10" fill="#a31d21" stroke="#a31d21"/>
+        <path d="M34 42 L34 48 M34 68 L34 74 M18 58 L24 58 M44 58 L50 58 M23 47 L27 51 M41 65 L45 69 M45 47 L41 51 M27 65 L23 69" stroke="#a31d21"/>
+        <!-- flame above the funnel -->
+        <path d="M112 50 Q118 36 124 50 Q130 38 136 50" stroke="#a31d21" stroke-width="3"/>
+        <path d="M4 110 Q16 104 28 110 T52 110 T76 110 T100 110 T124 110 T148 110 T172 110 T190 110" stroke="#1d4e6b"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ================= GRID: 8 numbered stories ================= -->
+  <section class="grid">
+
+    <div class="cell">
+      <div class="num">1</div>
+      <div>
+        <div class="tag">Europe · Ukraine War <span class="conf off">Official</span></div>
+        <h3>Strikes Cut Power in Five Regions</h3>
+        <p>Russian missiles hit a Kyiv shopping centre, wounding 7; Ukraine says it damaged five jets at a Russian air base.</p>
+        <p class="src">Sources: Reuters, Al Jazeera</p>
+      </div>
+    </div>
+
+    <div class="cell">
+      <div class="num">2</div>
+      <div>
+        <div class="tag">Americas · Trade <span class="conf off">Official</span></div>
+        <h3>US Tariffs on 14 Partners</h3>
+        <p>Washington proposes new duties on China, the EU, Japan and 11 others over factory overcapacity; Beijing vows retaliation.</p>
+        <p class="src">Sources: Reuters, CNBC</p>
+      </div>
+    </div>
+
+    <div class="cell">
+      <div class="num">3</div>
+      <div>
+        <div class="tag">Middle East · Gaza <span class="conf">Reported</span></div>
+        <h3>Strike Kills Hamas Security Chief</h3>
+        <p>An Israeli strike kills a Hamas security chief; nine die in Deir al-Balah on a third straight night of attacks.</p>
+        <p class="src">Sources: BBC, South China Morning Post</p>
+      </div>
+    </div>
+
+    <div class="cell">
+      <div class="num">4</div>
+      <div>
+        <div class="tag">Europe · Central Banks <span class="conf off">Official</span></div>
+        <h3>De Cos Picked as Next ECB Chief</h3>
+        <p>Euro states choose Spain&rsquo;s Pablo Hern&aacute;ndez de Cos to succeed Christine Lagarde in February.</p>
+        <p class="src">Sources: Reuters, AP</p>
+      </div>
+    </div>
+
+    <div class="cell">
+      <div class="num">5</div>
+      <div>
+        <div class="tag">Asia · Space <span class="conf off">Official</span></div>
+        <h3>Shenzhou-24 Docks; First Pakistani in Orbit</h3>
+        <p>China&rsquo;s Shenzhou-24 reaches Tiangong station carrying the first Pakistani astronaut to fly to orbit.</p>
+        <p class="src">Sources: The Nation (PK), SUCH TV</p>
+      </div>
+    </div>
+
+    <div class="cell">
+      <div class="num">6</div>
+      <div>
+        <div class="tag">Asia · India <span class="conf off">Official</span></div>
+        <h3>India Marks 18 Years Since 26/11</h3>
+        <p>Tributes across India on the Mumbai attacks anniversary, as the nation also marks 77 years of its Constitution.</p>
+        <p class="src">Sources: The Hindu, The Print</p>
+      </div>
+    </div>
+
+    <div class="cell">
+      <div class="num">7</div>
+      <div>
+        <div class="tag">Middle East · Kuwait <span class="conf">Reported</span></div>
+        <h3>Drone Attack Kills Two Italians</h3>
+        <p>Two Italian technicians die in a drone attack on Kuwait; Italy and Kuwait blame Iran, which denies any role.</p>
+        <p class="src">Sources: Italian foreign ministry, Reuters</p>
+      </div>
+    </div>
+
+    <div class="cell">
+      <div class="num">8</div>
+      <div>
+        <div class="tag">Europe · Chess <span class="conf off">Official</span></div>
+        <h3>Gukesh Meets Sindarov in Game 3</h3>
+        <p>The world championship is level after two draws. Game 3 is played in Geneva today.</p>
+        <p class="src">Sources: The Guardian, Hindustan Times</p>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ================= ALSO ON... ================= -->
+  <section class="also">
+    <h4>Also on <span>Thursday 26 November</span></h4>
+    <div class="also-cols">
+      <ul>
+        <li><b>Macy&rsquo;s parade postponed</b> to Sat. — nor&rsquo;easter, 60 mph gusts</li>
+        <li><b>US jobless claims</b> fall to 187,000</li>
+        <li><b>Nvidia sell-off</b> drags S&amp;P, Nasdaq down</li>
+        <li><b>Birthright order blocked</b> by a second judge</li>
+        <li><b>Plane crashes</b> into Gulf of Mexico; six aboard</li>
+        <li><b>UK net migration</b> falls to 77,000</li>
+        <li><b>EU imposes visas, quotas</b> on Chinese cars</li>
+        <li><b>Diesel tanker capsizes</b> off Ibiza; one dies</li>
+        <li><b>Russian war dead</b> near 500,000, leaked data say</li>
+      </ul>
+      <ul>
+        <li><b>Murmansk governor</b> held on corruption charges</li>
+        <li><b>Germany arrests two</b> over synagogue-attack plot</li>
+        <li><b>Bangladesh lifts</b> garment wage 36% to Tk17,000</li>
+        <li><b>Malaysia axes Google</b> for 14 days over YouTube</li>
+        <li><b>Kim calls for wider</b> tactical nuclear deployment</li>
+        <li><b>PIA shifts UK flights</b> to its own 777 fleet</li>
+        <li><b>Bogor gold-mine flood:</b> 13 dead, 13 missing</li>
+        <li><b>DR Congo Ebola</b> cases pass 12,000</li>
+        <li><b>Twice-yearly HIV jab</b> reaches Africa</li>
+      </ul>
+      <ul>
+        <li><b>Sudan drone strikes</b> kill 19 in Blue Nile</li>
+        <li><b>Cairo tanker fire</b> kills 31; driver held</li>
+        <li><b>Swiss tourist killed</b> by an elephant in Cameroon</li>
+        <li><b>Colombia police free</b> 20 supermarket hostages</li>
+        <li><b>Brazil mosquitoes</b> cut virus infections 68%</li>
+        <li><b>Solomon Islands</b> signs Australia security pact</li>
+        <li><b>Hera reveals</b> DART crater on Dimorphos</li>
+        <li><b>Andy Taylor dies at 65,</b> Duran Duran guitarist</li>
+        <li><b>Dozens of states</b> urge Russia to halt riot-agent use</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================= MAP + TIMELINE ================= -->
+  <section class="mapband">
+    <div class="mapbox">
+      <h5>The world <span>today</span></h5>
+      <!-- simplified equirectangular world outline; pins at approx lon/lat -->
+      <svg width="330" height="102" viewBox="0 0 600 140" fill="#d8cfb6" stroke="#1b1813" stroke-width="1.5">
+        <rect x="0" y="0" width="600" height="140" fill="#f6f1e3" stroke="none"/>
+        <!-- North America -->
+        <path d="M28 22 L120 14 L168 26 L186 44 L150 66 L120 78 L96 66 L60 72 L30 52 Z"/>
+        <!-- Greenland -->
+        <path d="M196 8 L232 10 L228 26 L200 24 Z"/>
+        <!-- South America -->
+        <path d="M150 82 L196 78 L214 96 L196 128 L172 118 L152 98 Z"/>
+        <!-- Europe -->
+        <path d="M300 22 L352 14 L372 30 L352 48 L316 52 L296 38 Z"/>
+        <!-- Africa -->
+        <path d="M306 58 L356 54 L392 66 L384 108 L350 122 L318 96 L302 76 Z"/>
+        <!-- Asia -->
+        <path d="M376 18 L520 12 L566 28 L552 62 L500 78 L440 72 L400 56 L376 40 Z"/>
+        <!-- SE Asia islands -->
+        <path d="M470 84 L500 82 L506 94 L478 96 Z"/>
+        <!-- Australia -->
+        <path d="M486 100 L556 96 L572 110 L540 124 L498 118 Z"/>
+        <!-- pins: red dots -->
+        <g fill="#a31d21" stroke="#a31d21" stroke-width="1">
+          <circle cx="177" cy="38" r="4"/><circle cx="350" cy="31" r="4"/>
+          <circle cx="357" cy="46" r="4"/><circle cx="383" cy="50" r="4"/>
+          <circle cx="307" cy="30" r="4"/><circle cx="421" cy="55" r="4"/>
+          <circle cx="303" cy="40" r="4"/><circle cx="177" cy="66" r="4"/>
+          <circle cx="325" cy="73" r="4"/><circle cx="567" cy="77" r="4"/>
+          <circle cx="493" cy="39" r="4"/>
+        </g>
+        <g font-family="Helvetica Neue, Arial, sans-serif" font-size="10" fill="#1b1813" stroke="none">
+          <text x="186" y="34">NEW YORK</text>
+          <text x="356" y="26">KYIV</text>
+          <text x="388" y="46">HORMUZ</text>
+          <text x="424" y="50">MUMBAI</text>
+          <text x="330" y="86">KINSHASA</text>
+          <text x="500" y="34">BEIJING</text>
+        </g>
+      </svg>
+    </div>
+    <div class="tlbox">
+      <h5>The day in <span>UTC</span> <span style="color:#6b6350; letter-spacing:0.5px; font-weight:400;">— times approximate</span></h5>
+      <div class="timeline">
+        <div class="slot"><div class="t">~00:30</div><p>Russian missiles and drones strike Kyiv overnight</p></div>
+        <div class="slot"><div class="t">~04:00</div><p>Diesel tanker Med Emre capsizes off Ibiza</p></div>
+        <div class="slot"><div class="t">~09:00</div><p>Shenzhou-24 docks at Tiangong station</p></div>
+        <div class="slot"><div class="t">~13:30</div><p>US jobless claims fall to 187,000</p></div>
+        <div class="slot"><div class="t">~14:00</div><p>EU ambassadors back Hern&aacute;ndez de Cos for ECB chief</p></div>
+        <div class="slot"><div class="t">~18:00</div><p>Houthis claim the Ras Tanura refinery strike</p></div>
+        <div class="slot"><div class="t">Evening</div><p>Gukesh–Sindarov Game 3 under way in Geneva</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= DATE CHECK + TICKER ================= -->
+  <footer class="datecheck">
+    <b>Date check — not today, left out on purpose:</b>
+    Sooryavanshi&rsquo;s 204 off 53 balls (Tue 24 Nov, Doha) · COP31 talks collapse (25 Nov) ·
+    Nvidia reinstates Huang, shares +31% (24–25 Nov) · Huawei convicted in US trial (25 Nov) ·
+    Ukraine sinks a Russian warship off Benghazi (24 Nov) · Senegal restored as Africa Cup champions (24 Nov)
+  </footer>
+
+  <footer class="ticker">
+    <div class="label">Markets &amp; More</div>
+    <div class="items">
+      S&amp;P 500 <span class="down">down</span> on Nvidia sell-off<span class="sep"> · </span>Nasdaq <span class="down">down</span><span class="sep"> · </span>US jobless claims 187,000<span class="sep"> · </span>Brent crude edges up on Hormuz escalation<span class="sep"> · </span>ECB pick: Hern&aacute;ndez de Cos
+    </div>
+  </footer>
+
+</body>
+</html>
